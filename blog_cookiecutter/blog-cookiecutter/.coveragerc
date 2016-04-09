@@ -1,0 +1,5 @@
+[run]
+include = blog-cookiecutter/*
+omit = *migrations*, *tests*
+plugins =
+    django_coverage_plugin

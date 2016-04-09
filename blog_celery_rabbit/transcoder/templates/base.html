@@ -1,0 +1,71 @@
+{% load staticfiles i18n %}<!DOCTYPE html>
+<html lang="en" ng-app>
+{% load bootstrap3 %}
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block title %}Transcoder{% endblock title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    {% block css %}
+    <!-- Latest compiled and minified CSS -->
+    {% bootstrap_css %}
+
+    <!-- Your stuff: Third-party css libraries go here -->
+
+    <!-- This file store project specific CSS -->
+    <link href="{% static 'css/project.css' %}" rel="stylesheet">
+    {% endblock %}
+
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Transcoder</a>
+          </div>
+          <div class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="{% url 'home' %}">Home</a></li>
+              <li><a href="{% url 'audio:upload' %}">Upload File</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </nav>
+
+      <div class="container">
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        {% block content %}
+        {% endblock content %}
+
+      </div> <!-- /container -->
+
+      {% block modal %}{% endblock modal %}
+
+      <!-- Le javascript
+      ================================================== -->
+      <!-- Placed at the end of the document so the pages load faster -->
+      {% block javascript %}
+      {% bootstrap_javascript %}
+
+        <!-- place project specific Javascript in this file -->
+        <script src="{% static 'js/project.js' %}"></script>
+      {% endblock javascript %}
+    </body>
+ </html>

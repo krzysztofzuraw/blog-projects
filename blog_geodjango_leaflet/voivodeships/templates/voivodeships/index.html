@@ -1,0 +1,34 @@
+<html>
+    {% load leaflet_tags %}
+    {% load static %}
+    <head>
+        <style media="screen">
+            #poland { width:100%; height:100% }
+        </style>
+      {% leaflet_js %}
+      {% leaflet_css %}
+      <script src="{% static 'leaflet-ajax/dist/leaflet.ajax.min.js' %}"></script>
+      <script src="{% static 'spin.js/spin.min.js' %}"></script>
+      <script src="{% static 'leaflet-spin/leaflet.spin.js' %}"></script>
+    </head>
+    <body>
+      <script type="text/javascript">
+         function map_init_basic (map, options) {
+               var geojsonPointLayer = new L.GeoJSON.AJAX("{% url 'points' %}", {
+                   onEachFeature:function(feature, layer) {
+                        layer.bindPopup(feature.properties.name.toString());
+                    }
+                });
+               geojsonPointLayer.addTo(map);
+
+               var geojsonVoivodeshipsLayer = new L.GeoJSON.AJAX("{% url 'voivodeships' %}", {
+                   onEachFeature:function(feature, layer) {
+                       layer.bindPopup(feature.properties.jpt_nazwa_field.toString())
+                   }
+               });
+               geojsonVoivodeshipsLayer.addTo(map);
+           }
+      </script>
+      {% leaflet_map "poland" callback="window.map_init_basic" %}
+   </body>
+</html>

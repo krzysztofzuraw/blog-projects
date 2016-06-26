@@ -1,0 +1,19 @@
+<html>
+  <head>
+  </head>
+  <body>
+    {% if sucess %}
+      <h1>Your request has been submitted</h1>
+    {% else %}
+      <h1>Question Form</h1>
+      <form action="{% url 'question' %}" method="post">{% csrf_token %}
+	{{ question_form }}
+	<input type="submit" value="Send Question">
+      </form>
+      <h1>Answer Form</h1>
+      <form action="{% url 'answer' %}" method="post">{% csrf_token %}
+	{{ answer_form }}
+	<input type="submit" value="Send Answer">
+      </from>
+    {% endif %}
+  </body>

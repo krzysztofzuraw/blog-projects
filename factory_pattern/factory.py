@@ -14,16 +14,13 @@ class BaseArchive(object):
     def generate(self):
         raise NotImplementedError()
 
+    @classmethod
+    def check_extenstion(cls,extension):
+        return extension == cls.EXTENSION
+
 
 class ZIPArchive(BaseArchive):
     EXTENSION = '.zip'
-
-    @classmethod
-    def check_extenstion(cls,extension):
-        if extension == cls.EXTENSION:
-            return True
-        else:
-            return False
 
     def generate(self):
         with ZipFile(self.location_path, 'w') as zip_file:
@@ -33,13 +30,6 @@ class ZIPArchive(BaseArchive):
 
 class TARArchive(BaseArchive):
     EXTENSION = '.tar'
-
-    @classmethod
-    def check_extenstion(cls,extension):
-        if extension == cls.EXTENSION:
-            return True
-        else:
-            return False
 
     def generate(self):
         with tarfile.open(self.location_path, 'w') as tar_file:
@@ -64,10 +54,16 @@ class ArchiveManager(object):
 
 
 if __name__ == '__main__':
-    zip_archive = ZIPArchive(os.path.join(os.getcwd(), 'zip.zip'), ['for_zip.txt'])
+    zip_archive = ZIPArchive(
+        os.path.join(os.getcwd(), 'zip.zip'), ['for_zip.txt']
+    )
     zip_archive.generate()
-    tar_archive = TARArchive(os.path.join(os.getcwd(), 'tar.tar'), ['for_tar.txt'])
+    tar_archive = TARArchive(
+        os.path.join(os.getcwd(), 'tar.tar'), ['for_tar.txt']
+    )
     tar_archive.generate()
 
-    archive = ArchiveManager(os.path.join(os.getcwd(), 'zips.zip'), ['for_zip', 'for_tar.txt'])
+    archive = ArchiveManager(
+        os.path.join(os.getcwd(), 'zips.zip'), ['for_zip.txt', 'for_tar.txt']
+    )
     archive.create_archive()

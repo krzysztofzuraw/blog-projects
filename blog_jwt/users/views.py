@@ -1,12 +1,14 @@
-from rest_framework import status, viewsets, permissions
-from rest_framework_jwt.settings import api_settings
-from rest_framework.reverse import reverse
-from rest_framework.views import APIView
+import jwt
 from django.contrib.auth.models import User
+from django.utils.translation import ugettext as _
+from rest_framework import exceptions, permissions, status, viewsets
 from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
-from .serializers import UserSerializer
+from rest_framework.reverse import reverse
+from rest_framework.views import APIView
+from rest_framework_jwt.settings import api_settings
 
+from .serializers import UserSerializer
 
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER

@@ -1,10 +1,10 @@
-from django.conf.urls import url, include
+from django.conf.urls import include, url
 from django.contrib import admin
-from tasks.views import TaskViewSet
-from users.views import UserViewSet, CreateUserView, ActivateUser
 from rest_framework.routers import DefaultRouter
 from rest_framework_jwt.views import obtain_jwt_token
 
+from tasks.views import TaskViewSet
+from users.views import ActivateUser, CreateUserView, UserViewSet
 
 router = DefaultRouter()
 router.register(r'tasks', TaskViewSet)

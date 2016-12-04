@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+        {{ form.as_p }}
+    </div>
+    <input type="submit" value="Submit" class="btn btn-primary" >
+</form>
+</div>
+{% endblock content %}
+Status API Training Shop Blog About

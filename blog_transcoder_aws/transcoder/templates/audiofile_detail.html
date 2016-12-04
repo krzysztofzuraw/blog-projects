@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ object.name }}<h1>
+<ul><a href="{{ object.mp3_file.url }}">Mp3 File</a></ul>
+{% if object.was_processed %}
+    <ul><a href="{{ object.ac3_file.url}}">Ac3 File</a></ul>
+    <ul><a href="{{ object.ogg_file.url}}">Ogg File</a></ul>
+    <ul><a href="{{ object.wav_file.url}}">Wav File</a><ul>
+{% endif %}
+{% endblock content %}

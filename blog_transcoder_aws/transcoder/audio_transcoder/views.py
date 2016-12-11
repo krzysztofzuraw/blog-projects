@@ -6,8 +6,8 @@ from django.core.urlresolvers import reverse
 
 from .forms import AudioFileFrom
 from .models import AudioFile
+from aws_transcoder.transcoder import transcoder
 
-from taskapp.tasks import transcode_mp3
 
 class UploadAudioFileView(FormView):
     template_name = 'upload.html'
@@ -19,8 +19,16 @@ class UploadAudioFileView(FormView):
             mp3_file=self.get_form_kwargs().get('files')['mp3_file']
         )
         audio_file.save()
-        #transcode_mp3.delay(audio_file.id)
-        return HttpResponseRedirect(reverse('audio:detail', kwargs={'pk': audio_file.pk}))
+        wav_filename, flac_filename, mp4_filename = transcoder.start_transcode(
+            filename=audio_file.mp3_file.name
+        )
+        audio_file.mp4_file = mp4_filename
+        audio_file.flac_file = flac_filename
+        audio_file.wav_file = wav_filename
+        audio_file.save()
+        return HttpResponseRedirect(
+            reverse('audio:detail', kwargs={'pk': audio_file.pk})
+        )
 
     def get_success_url(self):
         return reverse('home')

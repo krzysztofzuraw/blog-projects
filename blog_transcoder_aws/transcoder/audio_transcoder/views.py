@@ -1,11 +1,21 @@
+import json
 from django.views.generic.edit import FormView
-from django.views.generic.detail import DetailView
-
-from django.http import HttpResponseRedirect
+from django.views.generic.detail import DetailView, View
+from django.http import (
+    HttpResponseRedirect,
+    HttpResponse,
+    HttpResponseNotAllowed,
+    HttpResponseForbidden
+)
 from django.core.urlresolvers import reverse
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib import messages
+from django.conf import settings
+
 
 from .forms import AudioFileFrom
 from .models import AudioFile
+from .utlis import convert_sns_str_to_json
 from aws_transcoder.transcoder import transcoder
 
 
@@ -37,3 +47,16 @@ class UploadAudioFileView(FormView):
 class AudioFileDetailView(DetailView):
     template_name = 'audiofile_detail.html'
     model = AudioFile
+
+
+@csrf_exempt
+def transcode_complete(request):
+    if request.method != 'POST':
+        return HttpResponseNotAllowed(request.method)
+    if request.META['HTTP_X_AMZ_SNS_TOPIC_ARN'] != settings.SNS_TOPIC_ARN:
+        return HttpResponseForbidden('Not vaild SNS topic ARN')
+    json_body = json.loads(request.body.decode('utf-8'), object_hook=convert_sns_str_to_json)
+    if json_body['Message']['state'] == 'COMPLETED':
+        # do something
+        pass
+    return HttpResponse('OK')

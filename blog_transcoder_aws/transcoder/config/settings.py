@@ -27,7 +27,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['738e0dc0.ngrok.io']
 
 
 # Application definition
@@ -123,9 +123,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-#MEDIA_ROOT = os.path.join(BASE_DIR.root, 'media')
+# MEDIA_ROOT = os.path.join(BASE_DIR.root, 'media')
 
-#MEDIA_URL = '/media/'
+# MEDIA_URL = '/media/'
 
 
 # Custom stuff
@@ -153,3 +153,6 @@ STATICFILES_DIRS = (
 MEDIAFILES_LOCATION = 'media'
 MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
 DEFAULT_FILE_STORAGE = 'audio_transcoder.storages.MediaStorage'
+
+# sns
+SNS_TOPIC_ARN = env('SNS_TOPIC_ARN')

@@ -11,8 +11,13 @@ urlpatterns = [
         name='upload'
     ),
     url(
-        regex=r'^(?P<pk>[-\w]+)/$',
+        regex=r'^(?P<pk>\d+)/$',
         view=views.AudioFileDetailView.as_view(),
         name='detail'
+    ),
+    url(
+        regex=r'^transcode-complete/$',
+        view=views.transcode_complete,
+        name='transcode-complete'
     )
 ]

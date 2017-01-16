@@ -3,9 +3,13 @@
 {% block content %}
 <h1>{{ object.name }}<h1>
 <ul><a href="{{ object.mp3_file.url }}">Mp3 File</a></ul>
-{% if object.was_processed %}
-    <ul><a href="{{ object.ac3_file.url}}">Ac3 File</a></ul>
-    <ul><a href="{{ object.ogg_file.url}}">Ogg File</a></ul>
-    <ul><a href="{{ object.wav_file.url}}">Wav File</a><ul>
+{% if object.flac_file %}
+    <ul><a href="{{ object.flac_file.url}}">Flac File</a></ul>
+{% endif %}
+{% if object.wav_file.url %}
+    <ul><a href="{{ object.wav_file.url}}">Wav File</a></ul>
+{% endif %}
+{% if object.mp4_file.url %}
+    <ul><a href="{{ object.mp4_file.url}}">Mp4 File</a><ul>
 {% endif %}
 {% endblock content %}

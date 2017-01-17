@@ -1,22 +1,19 @@
 import json
-from django.views.generic.edit import FormView
-from django.views.generic.detail import DetailView, View
-from django.http import (
-    HttpResponseRedirect,
-    HttpResponse,
-    HttpResponseNotAllowed,
-    HttpResponseForbidden
-)
-from django.core.urlresolvers import reverse
-from django.views.decorators.csrf import csrf_exempt
-from django.contrib import messages
-from django.conf import settings
 
+from django.conf import settings
+from django.contrib import messages
+from django.core.urlresolvers import reverse
+from django.http import (HttpResponse, HttpResponseForbidden,
+                         HttpResponseNotAllowed, HttpResponseRedirect)
+from django.views.decorators.csrf import csrf_exempt
+from django.views.generic.detail import DetailView, View
+from django.views.generic.edit import FormView
+
+from aws_transcoder.transcoder import transcoder
 
 from .forms import AudioFileFrom
 from .models import AudioFile
 from .utlis import convert_sns_str_to_json
-from aws_transcoder.transcoder import transcoder
 
 
 class UploadAudioFileView(FormView):

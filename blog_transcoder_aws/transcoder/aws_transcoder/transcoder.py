@@ -1,8 +1,7 @@
 import os
 
-from django.conf import settings
-
 import boto3
+from django.conf import settings
 
 
 class AudioTranscoder(object):

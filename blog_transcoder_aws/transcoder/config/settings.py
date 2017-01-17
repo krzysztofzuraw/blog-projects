@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+
 import environ
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 env = environ.Env()
 BASE_DIR = environ.Path(__file__) - 2
@@ -42,6 +44,7 @@ INSTALLED_APPS = [
     'audio_transcoder',
     'bootstrap3',
     'storages',
+    'transcode_messages'
 ]
 
 MIDDLEWARE_CLASSES = [

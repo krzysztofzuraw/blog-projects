@@ -29,8 +29,9 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['738e0dc0.ngrok.io']
+ALLOWED_HOSTS = ['a7ab6cb6.ngrok.io', '127.0.0.1']
 
+INTERNAL_IPS = ['127.0.0.1']
 
 # Application definition
 
@@ -44,7 +45,8 @@ INSTALLED_APPS = [
     'audio_transcoder',
     'bootstrap3',
     'storages',
-    'transcode_messages'
+    'transcode_messages',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -56,6 +58,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -70,7 +73,8 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+                #'django.contrib.messages.context_processors.messages',
+                'transcode_messages.context_processors.message_context_processor'
             ],
         },
     },
@@ -147,8 +151,9 @@ AWS_S3_HOST = 's3-eu-west-1.amazonaws.com'
 
 # Static files
 STATICFILES_LOCATION = 'static'
-STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
-STATICFILES_STORAGE = 'audio_transcoder.storages.StaticStorage'
+#STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+STATIC_URL = '/static/'
+#STATICFILES_STORAGE = 'audio_transcoder.storages.StaticStorage'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR.root, 'static'),
 )

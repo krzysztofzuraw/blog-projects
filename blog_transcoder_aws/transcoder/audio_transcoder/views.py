@@ -10,6 +10,7 @@ from django.views.generic.detail import DetailView, View
 from django.views.generic.edit import FormView
 
 from aws_transcoder.transcoder import transcoder
+from transcode_messages.models import Message
 
 from .forms import AudioFileFrom
 from .models import AudioFile
@@ -54,6 +55,10 @@ def transcode_complete(request):
         return HttpResponseForbidden('Not vaild SNS topic ARN')
     json_body = json.loads(request.body.decode('utf-8'), object_hook=convert_sns_str_to_json)
     if json_body['Message']['state'] == 'COMPLETED':
-        # do something
-        pass
+        audio_file = AudioFile.objects.get(
+            mp3_file=json_body['Message']['input']['key'][6:]
+        )
+        Message.objects.create(
+            text='Your file {} has been processed'.format(audio_file.name)
+        )
     return HttpResponse('OK')

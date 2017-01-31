@@ -1,0 +1,2 @@
+run:
+	gunicorn application:app

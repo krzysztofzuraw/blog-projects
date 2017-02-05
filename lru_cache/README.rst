@@ -1,7 +1,7 @@
-Example application for pitfal of lru cache blog post
------------------------------------------------------
+Example application for Gunicorn & LRU cache pitfall blog post
+--------------------------------------------------------------
 
-Small application used in blog post - pitfal of lru cache.
+Small application used in blog post - Gunicorn & LRU cache pitfall.
 
 Running
 -------
@@ -10,3 +10,5 @@ Running
 
   $ pip install -r requirements.txt
   $ make run
+  $ make store
+  $ get_info

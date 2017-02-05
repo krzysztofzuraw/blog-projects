@@ -18,3 +18,5 @@ Project used in various blog posts:
 * [Mocks and monkeypatching in python](https://github.com/krzysztofzuraw/personal-blog-projects/tree/master/blog_mocks)
 
 * [Two forms one view in django](https://github.com/krzysztofzuraw/personal-blog-projects/tree/master/two_forms)
+
+* [Gunicorn & LRU cache pitfall](https://github.com/krzysztofzuraw/personal-blog-projects/tree/master/lru_cache)

@@ -5,3 +5,9 @@ django-environ==0.4.0
 
 # Python-PostgreSQL Database Adapter
 psycopg2==2.6.2
+
+# Images
+Pillow==4.1.1
+
+# DRFs
+djangorestframework==3.6.2

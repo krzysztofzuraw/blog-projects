@@ -1,0 +1,32 @@
+version: '2'
+
+volumes:
+  postgres_data_dev: {}
+
+services:
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres_db
+    volumes:
+      - postgres_data_dev:/var/lib/postgresql/data
+  django:
+    build:
+      context: .
+      dockerfile: ./compose/django/Dockerfile
+    command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres_db
+      - DATABASE_URL=postgres://postgres:postgres@postgres:5432/postgres_db
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    links:
+      - postgres

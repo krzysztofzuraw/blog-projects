@@ -1,0 +1,7 @@
+Django==1.10.4
+
+# Configuration
+django-environ==0.4.0
+
+# Python-PostgreSQL Database Adapter
+psycopg2==2.6.2

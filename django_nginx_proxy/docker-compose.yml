@@ -16,7 +16,7 @@ services:
     build:
       context: .
       dockerfile: ./compose/django/Dockerfile
-    command: python manage.py runserver 0.0.0.0:8000
+    command: python manage.py runserver 0.0.0.0:5000
     depends_on:
       - postgres
     environment:
@@ -30,3 +30,11 @@ services:
       - "8000:8000"
     links:
       - postgres
+  nginx:
+    build: ./compose/nginx
+    depends_on:
+      - django
+    ports:
+      - "0.0.0.0:80:80"
+    volumes:
+      - ./django_nginx_proxy/media:/var/www/media

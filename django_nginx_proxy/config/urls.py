@@ -14,7 +14,4 @@ if settings.DEBUG:
 
         urlpatterns += [
             url(r'^__debug__/', include(debug_toolbar.urls)),
-            url(r'^media/(?P<path>.*)$', serve, {
-                'document_root': settings.MEDIA_ROOT,
-            }),
         ]

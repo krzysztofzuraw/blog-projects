@@ -1,0 +1,38 @@
+root = true
+
+[*]
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+
+[*.{py,rst,ini}]
+indent_style = space
+indent_size = 4
+
+[*.py]
+line_length=99
+
+[*.{html,css,scss,json,yml}]
+indent_style = space
+indent_size = 2
+
+[Makefile]
+indent_style = tab
+indent_size = 4
+
+[{package.json,.travis.yml}]
+indent_style = space
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
+
+[nginx.conf]
+indent_style = space
+indent_size = 2
+
+[**.min.js]
+indent_style = ignore
+insert_final_newline = ignore

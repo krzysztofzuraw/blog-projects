@@ -1,0 +1,14 @@
+# Local development dependencies go here
+-r base.txt
+
+# improved REPL
+ipdb==0.10.1
+
+# sort imports
+isort==4.2.5
+
+# flake8
+flake8==3.2.1
+
+# debugging
+django-debug-toolbar==1.6

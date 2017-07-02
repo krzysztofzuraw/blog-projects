@@ -11,7 +11,7 @@ Then run this command to run server & apply migrations.::
     $ make build
     $ make run
     $ make migrate
-
+    $ make loaddata
 
 Credits
 -------

@@ -31,6 +31,15 @@ make-migrations:
 migrate:
 	docker-compose run django python manage.py migrate
 
+createsuperuser:
+	docker-compose run django python manage.py createsuperuser
+
+dumpdata:
+	docker-compose run django python manage.py dumpdata --exclude=auth --exclude=contenttypes --exclude=sessions --output=data.json
+
+loaddata:
+	docker-compose run django python manage.py loaddata data.json
+
 enter-docker:
 	docker-compose run django bash
 

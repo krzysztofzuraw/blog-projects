@@ -10,7 +10,7 @@ class Film(models.Model):
         (5, 5)
     )
     title = models.CharField(max_length=100)
-    year = models.DateField()
+    air_date = models.DateField()
     rating = models.PositiveSmallIntegerField(choices=RATING_CHOICES)
     actors = models.ManyToManyField('actors.Actor')
 

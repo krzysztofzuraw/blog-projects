@@ -1,50 +1,67 @@
 .PHONY: help
-
 help:
 	@echo "Help"
 
+.PHONY: clean-pyc
 clean-pyc:
 	find . -name '*.pyc' -exec rm -f {} +
 	find . -name '*.pyo' -exec rm -f {} +
 	find . -name '*~' -exec rm -f {} +
 
+.PHONY: clean-pyc
 clean-build:
-	rm -fr build/
-	rm -fr dist/
-	rm -fr *.egg-info
+	rm -fr film_api/build/
+	rm -fr film_api/dist/
+	rm -fr film_api/*.egg-info
 
+.PHONY: clean-artifacts
 clean-artifacts:
-	rm -fr .tox/
-	rm -fr .cache/
+	rm -fr film_api/.tox/
+	rm -fr film_api/.cache/
 
-clean: clean-build clean-pyc clean-artifacts
+.PHONY: clean-node-modules
+clean-node-modules:
+	rm -fr film_ui/node_modules
 
+.PHONY: clean
+clean: clean-build clean-pyc clean-artifacts clean-node-modules
+
+.PHONY: build
 build:
 	docker-compose build
 
+.PHONY: run
 run:
 	docker-compose up
 
+.PHONY: make-migrations
 make-migrations:
 	docker-compose run django python manage.py makemigrations
 
+.PHONY: migrate
 migrate:
 	docker-compose run django python manage.py migrate
 
+.PHONY: createsuperuser
 createsuperuser:
 	docker-compose run django python manage.py createsuperuser
 
+.PHONY: dumpdata
 dumpdata:
 	docker-compose run django python manage.py dumpdata --exclude=auth --exclude=contenttypes --exclude=sessions --output=data.json
 
+.PHONY: loaddata
 loaddata:
 	docker-compose run django python manage.py loaddata data.json
 
+.PHONY: enter-docker
 enter-docker:
 	docker-compose run django bash
 
+.PHONY: isort
 isort:
 	docker-compose exec django sh -c 'isort --skip-glob=.?* -rc .'
 
+.PHONY: lint
 lint:
 	docker-compose exec django sh -c 'flake8 .'

@@ -12,7 +12,7 @@ services:
       - POSTGRES_DB=postgres_db
     volumes:
       - postgres_data_dev:/var/lib/postgresql/data
-  django:
+  film_api:
     build:
       context: .
       dockerfile: ./compose/django/Dockerfile
@@ -25,8 +25,18 @@ services:
       - POSTGRES_DB=postgres_db
       - DATABASE_URL=postgres://postgres:postgres@postgres:5432/postgres_db
     volumes:
-      - .:/app
+      - ./film_api:/app
     ports:
       - "8000:8000"
     links:
       - postgres
+  film_ui:
+    build:
+      context: .
+      dockerfile: ./compose/ui/Dockerfile
+    volumes:
+      - ./film_ui/:/app
+      - /app/node_modules
+    command: yarn start
+    ports:
+      - "3000:3000"

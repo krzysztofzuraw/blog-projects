@@ -6,4 +6,4 @@ from .models import Actor
 class ActorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Actor
-        fields = ('first_name', 'last_name', 'age', 'rating')
+        fields = ('first_name', 'last_name', 'age', 'rating', 'id')

@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.views.decorators.csrf import csrf_exempt
 
 from rest_framework import routers
 
@@ -17,7 +18,7 @@ router.register(r'films', films_views.FilmsViewSet)
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include(router.urls)),
-    url(r'^graphql', GraphQLView.as_view(graphiql=True, schema=schema)),
+    url(r'^graphql', csrf_exempt(GraphQLView.as_view(graphiql=True, schema=schema))),
 ]
 
 if settings.DEBUG:

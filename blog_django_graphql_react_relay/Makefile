@@ -36,19 +36,23 @@ run:
 
 .PHONY: make-migrations
 make-migrations:
-	docker-compose run django python manage.py makemigrations
+	docker-compose run film_api python manage.py makemigrations
 
 .PHONY: migrate
 migrate:
-	docker-compose run django python manage.py migrate
+	docker-compose run film_api python manage.py migrate
+
+.PHONY: shell
+shell:
+	docker-compose run film_api python manage.py shell
 
 .PHONY: createsuperuser
 createsuperuser:
-	docker-compose run django python manage.py createsuperuser
+	docker-compose run film_api python manage.py createsuperuser
 
 .PHONY: dumpdata
 dumpdata:
-	docker-compose run django python manage.py dumpdata --exclude=auth --exclude=contenttypes --exclude=sessions --output=data.json
+	docker-compose run film_api python manage.py dumpdata --exclude=auth --exclude=contenttypes --exclude=sessions --output=data.json
 
 .PHONY: loaddata
 loaddata:
@@ -56,12 +60,12 @@ loaddata:
 
 .PHONY: enter-docker
 enter-docker:
-	docker-compose run django bash
+	docker-compose run film_api bash
 
 .PHONY: isort
 isort:
-	docker-compose exec django sh -c 'isort --skip-glob=.?* -rc .'
+	docker-compose exec film_api sh -c 'isort --skip-glob=.?* -rc .'
 
 .PHONY: lint
 lint:
-	docker-compose exec django sh -c 'flake8 .'
+	docker-compose exec film_api sh -c 'flake8 .'

@@ -7,5 +7,7 @@ from film_database.movies_database import schema as external_api
 class Query(actors_schema.Query, films_schema.Query, external_api.Query, graphene.ObjectType):
     pass
 
+class Mutation(films_schema.Mutation, actors_schema.Mutation, graphene.ObjectType):
+    pass
 
-schema = graphene.Schema(query=Query)
+schema = graphene.Schema(query=Query, mutation=Mutation)

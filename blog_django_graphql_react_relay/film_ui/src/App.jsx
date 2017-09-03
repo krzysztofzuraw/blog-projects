@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, Panel, Tab, Nav, NavItem, PageHeader } from "react-bootstrap";
+import { Row, Col, Tab, Nav, NavItem, PageHeader } from "react-bootstrap";
 
 class App extends Component {
   render() {

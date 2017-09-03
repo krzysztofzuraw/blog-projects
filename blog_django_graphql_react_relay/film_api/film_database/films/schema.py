@@ -1,32 +1,90 @@
+import requests
+import arrow
 import graphene
-from graphene_django.types import DjangoObjectType
+from graphene import relay
+from graphene.types import datetime as graphene_datetime
+from graphql_relay.node.node import from_global_id, to_global_id
 
-from film_database.actors.schema import ActorType
+from film_database.actors.schema import Actor
 
-from .models import Film
+FILMS_ENDPOINT = 'http://127.0.0.1:8000/api/films/{id}/'
+ALL_FILMS_ENDPOINT = 'http://127.0.0.1:8000/api/films/'
 
 
-class FilmType(DjangoObjectType):
-    actors = graphene.List(ActorType)
+class Film(graphene.ObjectType):
 
     class Meta:
-        model = Film
+        interfaces = (relay.Node, )
 
-    @graphene.resolve_only_args
-    def resolve_actors(self):
-        return self.actors.all()
+    title = graphene.String()
+    actors = graphene.List(Actor, description='List of actors that play in the film')    
+    air_date = graphene_datetime.DateTime()
+    rating = graphene.Int()
+
+    @classmethod
+    def create_from_data(cls, data, id_):
+        return cls(
+            id=id_,
+            title=data['title'],
+            air_date=arrow.get(data['air_date']).date(),
+            rating=data['rating'],
+        )
+
+
+    @classmethod
+    def get_node(cls, id, context, info):
+        response = requests.get(FILMS_ENDPOINT.format(id=id))
+        data = response.json()
+        return Film.create_from_data(data, id)
+
+    def resolve_actors(self, args, context, info):
+        response = requests.get(FILMS_ENDPOINT.format(id=self.id))
+        data = response.json()
+        return [relay.Node.get_node_from_global_id(
+            to_global_id('Actor', actor_id),
+            context,
+            info
+        ) for actor_id in data['actors']]
 
 
 class Query(graphene.AbstractType):
-    all_films = graphene.List(FilmType)
-    film = graphene.Field(
-        FilmType,
-        id=graphene.Int(),
-    )
+    film = graphene.relay.Node.Field(Film)
+    films = graphene.List(Film)
 
-    def resolve_all_films(self, args, context, info):
-        return Film.objects.all()
+    def resolve_films(self, args, context, info):
+        response = requests.get(ALL_FILMS_ENDPOINT)
+        data = response.json()
+        return [Film.create_from_data(film, film['id']) for film in data]
 
-    def resolve_film(self, args, context, info):
-        id = args.get('id')
-        return Film.objects.get(id=id)
+
+class ActorInput(graphene.InputObjectType):
+    actor_id = graphene.ID(required=True)
+
+class CreateFilm(relay.ClientIDMutation):
+
+    class Input:
+        title = graphene.String(required=True)
+        actors = graphene.List(ActorInput)
+        air_date = graphene_datetime.DateTime(required=True)
+        rating = graphene.Int(required=True)
+
+    film = graphene.Field(Film)
+    
+    @classmethod
+    def mutate_and_get_payload(cls, args, context, info):
+        actors_ids = [from_global_id(actor['actor_id'])[1] for actor in args['actors']]
+        date = arrow.get(args['air_date']).date(),
+        data_to_sent = {
+            'title': args['title'],
+            'actors': actors_ids,
+            'air_date': date,
+            'rating': args['rating'],
+        }
+        response = requests.post(ALL_FILMS_ENDPOINT, data=data_to_sent)
+        data_from_server = response.json()
+        film = Film.create_from_data(data_from_server, data_from_server['id'])
+        return CreateFilm(film=film)
+
+
+class Mutation(graphene.AbstractType):
+    create_film = CreateFilm.Field()

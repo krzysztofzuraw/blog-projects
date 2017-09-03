@@ -93,3 +93,5 @@ GRAPHENE = {'SCHEMA': 'app.schema.schema'}
 
 # EXTERNAL APIs
 TMDB_API_KEY = env.str('TMDB_API_KEY', '')
+
+# DEFAULT_AUTHENTICATION_CLASSES = ()

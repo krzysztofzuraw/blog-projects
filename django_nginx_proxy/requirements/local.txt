@@ -4,6 +4,9 @@
 # improved REPL
 ipdb==0.10.1
 
+# debugging
+wdb==3.1.6
+
 # sort imports
 isort==4.2.5
 

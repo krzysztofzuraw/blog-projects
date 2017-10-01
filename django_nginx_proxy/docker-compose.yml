@@ -24,12 +24,15 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=postgres_db
       - DATABASE_URL=postgres://postgres:postgres@postgres:5432/postgres_db
+      - WDB_SOCKET_SERVER=wdb
+      - WDB_NO_BROWSER_AUTO_OPEN=True
     volumes:
       - .:/app
     ports:
-      - "8000:8000"
+      - "5000:5000"
     links:
       - postgres
+      - wdb
   nginx:
     build: ./compose/nginx
     depends_on:
@@ -38,3 +41,7 @@ services:
       - "0.0.0.0:80:80"
     volumes:
       - ./django_nginx_proxy/media:/var/www/media
+  wdb:
+    image: kozea/wdb-server
+    ports:
+      - "1984:1984"

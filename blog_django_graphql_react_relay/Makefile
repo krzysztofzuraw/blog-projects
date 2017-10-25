@@ -1,18 +1,8 @@
-.PHONY: help
-help:
-	@echo "Help"
-
 .PHONY: clean-pyc
 clean-pyc:
 	find . -name '*.pyc' -exec rm -f {} +
 	find . -name '*.pyo' -exec rm -f {} +
 	find . -name '*~' -exec rm -f {} +
-
-.PHONY: clean-pyc
-clean-build:
-	rm -fr film_api/build/
-	rm -fr film_api/dist/
-	rm -fr film_api/*.egg-info
 
 .PHONY: clean-artifacts
 clean-artifacts:
@@ -21,15 +11,19 @@ clean-artifacts:
 
 .PHONY: clean-node-modules
 clean-node-modules:
-	rm -fr film_ui/node_modules
+	rm -rf film_ui/node_modules
 
 .PHONY: clean
-clean: clean-build clean-pyc clean-artifacts clean-node-modules
+clean: clean-pyc clean-artifacts clean-node-modules
 
-.PHONY: build
-build:
+.PHONY: build-api
+build-api:
 	docker-compose build
-	
+
+.PHONY: build-ui
+build-ui:
+	cd film_ui; yarn
+
 .PHONY: run-api
 run-api:
 	docker-compose up
@@ -70,11 +64,11 @@ enter-film_api:
 isort:
 	docker-compose exec film_api sh -c 'isort --skip-glob=.?* -rc .'
 
-.PHONY: lint
-lint:
+.PHONY: lint-api
+lint-api:
 	docker-compose exec film_api sh -c 'flake8 .'
 
 .PHONY: generate-schema
 generate-schema:
 	docker-compose run film_api python manage.py graphql_schema
-	cp film_api/schema.json film_ui/schema.json
+	mv film_api/schema.json film_ui/schema.json

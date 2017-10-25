@@ -29,10 +29,14 @@ clean: clean-build clean-pyc clean-artifacts clean-node-modules
 .PHONY: build
 build:
 	docker-compose build
-
-.PHONY: run
-run:
+	
+.PHONY: run-api
+run-api:
 	docker-compose up
+
+.PHONY: run-ui
+run-ui:
+	cd film_ui; yarn run start
 
 .PHONY: make-migrations
 make-migrations:
@@ -56,11 +60,11 @@ dumpdata:
 
 .PHONY: loaddata
 loaddata:
-	docker-compose run django python manage.py loaddata data.json
+	docker-compose run film_api python manage.py loaddata data.json
 
-.PHONY: enter-docker
-enter-docker:
-	docker-compose run film_api bash
+.PHONY: enter-film_api
+enter-film_api:
+	film_api-compose run film_api bash
 
 .PHONY: isort
 isort:
@@ -69,3 +73,8 @@ isort:
 .PHONY: lint
 lint:
 	docker-compose exec film_api sh -c 'flake8 .'
+
+.PHONY: generate-schema
+generate-schema:
+	docker-compose run film_api python manage.py graphql_schema
+	cp film_api/schema.json film_ui/schema.json

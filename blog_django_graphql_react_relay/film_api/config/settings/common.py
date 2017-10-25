@@ -89,7 +89,12 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # GraphQL
-GRAPHENE = {'SCHEMA': 'app.schema.schema'}
+GRAPHENE = {
+    'SCHEMA': 'config.schema.schema',
+    'MIDDLEWARE': (
+        'graphene_django.debug.DjangoDebugMiddleware',
+    )
+}
 
 # EXTERNAL APIs
 TMDB_API_KEY = env.str('TMDB_API_KEY', '')

@@ -30,13 +30,3 @@ services:
       - "8000:8000"
     links:
       - postgres
-  film_ui:
-    build:
-      context: .
-      dockerfile: ./compose/ui/Dockerfile
-    volumes:
-      - ./film_ui/:/app
-      - /app/node_modules
-    command: yarn start
-    ports:
-      - "3000:3000"

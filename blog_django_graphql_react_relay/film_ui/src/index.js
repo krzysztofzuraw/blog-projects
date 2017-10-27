@@ -1,11 +1,24 @@
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap-theme.css';
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/css/bootstrap-theme.css";
 
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Router, Route, Switch } from "react-router-dom";
+import createHistory from "history/createBrowserHistory";
+import App from "./App";
+import Film from "./Film";
+import registerServiceWorker from "./registerServiceWorker";
 
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+const history = createHistory();
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const router = (
+  <Router history={history}>
+    <Switch>
+      <Route exact path="/" component={App} />
+      <Route path="/film/:filmId" component={Film} />
+    </Switch>
+  </Router>
+);
+
+ReactDOM.render(router, document.getElementById("root"));
 registerServiceWorker();

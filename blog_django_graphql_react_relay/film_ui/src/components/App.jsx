@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { PageHeader } from "react-bootstrap";
 import { QueryRenderer, graphql } from "react-relay";
-import environment from "../Enviroment";
+import environment from "../Environment";
 
 import FilmList from "./FilmList";
 

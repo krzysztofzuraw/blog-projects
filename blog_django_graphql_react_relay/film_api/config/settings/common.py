@@ -17,7 +17,7 @@ DJANGO_APPS = (
     'django.contrib.admin',
 )
 
-THIRD_PARTY_APPS = ('rest_framework', 'graphene_django', )
+THIRD_PARTY_APPS = ('rest_framework', 'graphene_django', 'corsheaders', )
 
 LOCAL_APPS = (
     'film_database.actors.apps.ActorsConfig', 'film_database.films.apps.FilmsConfig',
@@ -28,7 +28,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = (
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware', 'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware', 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -91,9 +91,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # GraphQL
 GRAPHENE = {
     'SCHEMA': 'config.schema.schema',
-    'MIDDLEWARE': (
-        'graphene_django.debug.DjangoDebugMiddleware',
-    )
+    'MIDDLEWARE': ('graphene_django.debug.DjangoDebugMiddleware', )
 }
 
 # EXTERNAL APIs

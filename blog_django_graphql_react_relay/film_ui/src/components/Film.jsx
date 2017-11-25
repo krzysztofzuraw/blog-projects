@@ -7,6 +7,8 @@ import {
   ListGroupItem
 } from "react-bootstrap";
 
+import { createFragmentContainer, graphql } from "react-relay";
+
 class Film extends React.Component {
   render() {
     return (
@@ -32,4 +34,12 @@ class Film extends React.Component {
   }
 }
 
-export default Film;
+export default createFragmentContainer(
+  Film,
+  graphql`
+    fragment Film_film on Film {
+      id
+      airDate
+    }
+  `
+);

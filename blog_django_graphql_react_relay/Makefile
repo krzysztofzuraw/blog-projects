@@ -9,10 +9,6 @@ clean-artifacts:
 	rm -fr film_api/.tox/
 	rm -fr film_api/.cache/
 
-.PHONY: clean-node-modules
-clean-node-modules:
-	rm -rf film_ui/node_modules
-
 .PHONY: clean
 clean: clean-pyc clean-artifacts clean-node-modules
 
@@ -20,17 +16,9 @@ clean: clean-pyc clean-artifacts clean-node-modules
 build-api:
 	docker-compose build
 
-.PHONY: build-ui
-build-ui:
-	cd film_ui; yarn
-
 .PHONY: run-api
 run-api:
 	docker-compose up
-
-.PHONY: run-ui
-run-ui:
-	cd film_ui; yarn run start
 
 .PHONY: make-migrations
 make-migrations:
@@ -70,5 +58,5 @@ lint-api:
 
 .PHONY: generate-schema
 generate-schema:
-	docker-compose run film_api python manage.py graphql_schema
+	docker-compose run film_api python manage.py graphql_schema --indent 2
 	mv film_api/schema.json film_ui/schema.json

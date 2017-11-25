@@ -5,8 +5,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Router, Route, Switch } from "react-router-dom";
 import createHistory from "history/createBrowserHistory";
-import App from "./App";
-import Film from "./Film";
+import App from "./components/App";
+import Film from "./components/Film";
 import registerServiceWorker from "./registerServiceWorker";
 
 const history = createHistory();

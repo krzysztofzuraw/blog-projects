@@ -12,16 +12,17 @@ class FilmList extends React.Component {
   };
 
   render() {
+    debugger;
     return (
       <div className="well" style={wellStyles}>
-        {filmList.map(key => (
+        {this.props.films.map(film => (
           <Button
-            key={key}
+            key={film.id}
             bsSize="large"
             block
-            onClick={() => this.handleClick(key)}
+            onClick={() => this.handleClick(film.id)}
           >
-            {key}
+            {film.title}
           </Button>
         ))}
       </div>

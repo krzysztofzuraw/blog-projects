@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash c75c4aacef90ebb8624141729ee53af9
+ * @relayHash c1b9792e7255c50873cf69a3dddb62b5
  */
 
 /* eslint-disable */
@@ -12,7 +12,6 @@ import type {ConcreteBatch} from 'relay-runtime';
 export type AppQueryResponse = {|
   +films: ?$ReadOnlyArray<?{|
     +id: string;
-    +title: ?string;
   |}>;
 |};
 */
@@ -22,8 +21,12 @@ export type AppQueryResponse = {|
 query AppQuery {
   films {
     id
-    title
+    ...FilmList_films
   }
+}
+
+fragment FilmList_films on Film {
+  title
 }
 */
 
@@ -50,11 +53,9 @@ const batch /*: ConcreteBatch*/ = {
             "storageKey": null
           },
           {
-            "kind": "ScalarField",
-            "alias": null,
-            "args": null,
-            "name": "title",
-            "storageKey": null
+            "kind": "FragmentSpread",
+            "name": "FilmList_films",
+            "args": null
           }
         ],
         "storageKey": null
@@ -88,18 +89,24 @@ const batch /*: ConcreteBatch*/ = {
             "storageKey": null
           },
           {
-            "kind": "ScalarField",
-            "alias": null,
-            "args": null,
-            "name": "title",
-            "storageKey": null
+            "kind": "InlineFragment",
+            "type": "Film",
+            "selections": [
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "args": null,
+                "name": "title",
+                "storageKey": null
+              }
+            ]
           }
         ],
         "storageKey": null
       }
     ]
   },
-  "text": "query AppQuery {\n  films {\n    id\n    title\n  }\n}\n"
+  "text": "query AppQuery {\n  films {\n    id\n    ...FilmList_films\n  }\n}\n\nfragment FilmList_films on Film {\n  title\n}\n"
 };
 
 module.exports = batch;

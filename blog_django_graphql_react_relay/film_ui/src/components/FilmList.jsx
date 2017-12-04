@@ -1,18 +1,15 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import { withRouter } from "react-router-dom";
-
-const filmList = ["Pulp Fiction", "Django"];
+import { createFragmentContainer, graphql } from "react-relay";
 
 const wellStyles = { maxWidth: 400, margin: "0 auto 10px" };
 
 class FilmList extends React.Component {
-  handleClick = filmId => {
-    this.props.history.push(`film/${filmId}`);
-  };
+  // handleClick = filmId => {
+  //   this.props.history.push(`film/${filmId}`);
+  // };
 
   render() {
-    debugger;
     return (
       <div className="well" style={wellStyles}>
         {this.props.films.map(film => (
@@ -20,7 +17,7 @@ class FilmList extends React.Component {
             key={film.id}
             bsSize="large"
             block
-            onClick={() => this.handleClick(film.id)}
+            // onClick={() => this.handleClick(film.id)}
           >
             {film.title}
           </Button>
@@ -30,4 +27,10 @@ class FilmList extends React.Component {
   }
 }
 
-export default withRouter(FilmList);
+export default createFragmentContainer(FilmList, {
+  films: graphql`
+    fragment FilmList_films on Film @relay(plural: true) {
+      title
+    }
+  `
+});

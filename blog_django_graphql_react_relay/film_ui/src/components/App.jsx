@@ -8,7 +8,7 @@ const FilmListQuery = graphql`
   query AppQuery {
     films {
       id
-      title
+      ...FilmList_films
     }
   }
 `;

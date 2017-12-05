@@ -9,6 +9,7 @@
 /*::
 import type {ConcreteFragment} from 'relay-runtime';
 export type FilmList_films = $ReadOnlyArray<{|
+  +id: string;
   +title: ?string;
 |}>;
 */
@@ -22,6 +23,13 @@ const fragment /*: ConcreteFragment*/ = {
   },
   "name": "FilmList_films",
   "selections": [
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "args": null,
+      "name": "id",
+      "storageKey": null
+    },
     {
       "kind": "ScalarField",
       "alias": null,

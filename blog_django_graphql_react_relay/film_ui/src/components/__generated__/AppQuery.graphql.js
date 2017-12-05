@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash c1b9792e7255c50873cf69a3dddb62b5
+ * @relayHash dc7e1f670d8394e9d5084fc7276541ee
  */
 
 /* eslint-disable */
@@ -26,6 +26,7 @@ query AppQuery {
 }
 
 fragment FilmList_films on Film {
+  id
   title
 }
 */
@@ -106,7 +107,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query AppQuery {\n  films {\n    id\n    ...FilmList_films\n  }\n}\n\nfragment FilmList_films on Film {\n  title\n}\n"
+  "text": "query AppQuery {\n  films {\n    id\n    ...FilmList_films\n  }\n}\n\nfragment FilmList_films on Film {\n  id\n  title\n}\n"
 };
 
 module.exports = batch;

@@ -7,39 +7,32 @@ import {
   ListGroupItem
 } from "react-bootstrap";
 
-import { createFragmentContainer, graphql } from "react-relay";
-
-class Film extends React.Component {
+export default class Film extends React.Component {
   render() {
+    const { airDate, title, rating, actors } = this.props.film;
+    debugger;
     return (
       <Grid>
-        <PageHeader style={{ "text-align": "center" }}>Film Title</PageHeader>
+        <PageHeader style={{ "text-align": "center" }}>{title}</PageHeader>
         <Panel header="Air date:" bsStyle="info">
-          2017-01-02
+          {airDate}
         </Panel>
         <Panel header="Rating" bsStyle="warning">
-          3
+          {rating}
         </Panel>
         <Panel header="Description" bsStyle="primary">
           Some long text
         </Panel>
         <Panel footer="Actors">
           <ListGroup>
-            <ListGroupItem href="#link1">Actor one</ListGroupItem>
-            <ListGroupItem href="#link2">Actor two</ListGroupItem>
+            {actors.map(actor => (
+              <ListGroupItem key={actor.id} href="#link1">
+                {actor.firstName} {actor.lastName}
+              </ListGroupItem>
+            ))}
           </ListGroup>
         </Panel>
       </Grid>
     );
   }
 }
-
-export default createFragmentContainer(
-  Film,
-  graphql`
-    fragment Film_film on Film {
-      id
-      airDate
-    }
-  `
-);

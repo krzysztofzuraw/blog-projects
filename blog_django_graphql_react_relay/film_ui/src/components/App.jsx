@@ -7,7 +7,6 @@ import FilmList from "./FilmList";
 const FilmListQuery = graphql`
   query AppQuery {
     films {
-      id
       ...FilmList_films
     }
   }

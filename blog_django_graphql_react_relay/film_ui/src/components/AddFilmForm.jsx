@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { FormGroup, ControlLabel, FormControl, Radio } from "react-bootstrap";
+import { FormGroup, ControlLabel, FormControl } from "react-bootstrap";
+
+import CreateFilmMutation from "../mutations/CreateFilmMutation";
 
 export default class AddFilmForm extends Component {
   constructor(props) {
@@ -13,19 +15,28 @@ export default class AddFilmForm extends Component {
   }
 
   handleChange = event => {
-    debugger;
     const target = event.target;
-    // const value =
+    const name = target.name;
+    const value =
+      target.type === "select-one" ? parseInt(target.value, 10) : target.value;
+    this.setState({
+      [name]: value
+    });
+  };
+
+  handleSubmit = () => {
+    CreateFilmMutation(this.state.title, this.state.date, this.state.rating);
   };
 
   render() {
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <FormGroup>
           <ControlLabel>Enter details of new film</ControlLabel>
           <FormControl
             type="text"
-            // value={this.state.value}
+            name="title"
+            value={this.state.title}
             placeholder="Title"
             onChange={this.handleChange}
           />
@@ -34,14 +45,19 @@ export default class AddFilmForm extends Component {
           <ControlLabel>Enter details of new film</ControlLabel>
           <FormControl
             type="date"
-            // value={this.state.value}
+            name="date"
+            value={this.state.date}
             placeholder="Air date"
             onChange={this.handleChange}
           />
         </FormGroup>
         <FormGroup onChange={this.handleChange}>
           <ControlLabel>Select rating</ControlLabel>
-          <FormControl componentClass="select" placeholder="select">
+          <FormControl
+            componentClass="select"
+            placeholder="select"
+            name="rating"
+          >
             <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -49,6 +65,7 @@ export default class AddFilmForm extends Component {
             <option value="4">4</option>
           </FormControl>
         </FormGroup>
+        <input type="submit" value="Submit" />
       </form>
     );
   }

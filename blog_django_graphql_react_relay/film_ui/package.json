@@ -52,7 +52,7 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
     "relay":
-      "relay-compiler --src ./src/components/ --schema ./schema.json --extensions jsx"
+      "relay-compiler --src ./src --schema ./schema.json --extensions jsx"
   },
   "devDependencies": {
     "babel-plugin-relay": "^1.4.1",

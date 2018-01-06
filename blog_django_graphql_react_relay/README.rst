@@ -13,8 +13,8 @@ Then run this command to run server & apply migrations.::
     $ make migrate
     $ make loaddata
 
-To run `film_ui` open new terminal window and enter film_ui folder. Then run `yarn run relay` to compile Relay and 
-`yarn start` to start UI app.
+To run ``film_ui`` open new terminal window and enter film_ui folder. Then run ``yarn run relay`` to compile Relay and 
+``yarn start`` to start UI app.
 
 Credits
 -------

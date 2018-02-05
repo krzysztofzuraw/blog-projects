@@ -1,28 +1,14 @@
-.App {
-  text-align: center;
+@tailwind preflight;
+
+/* Here we can add any custom overrides */
+.field {
+  @apply .border .py-2 .px-3 .text-grey-darkest;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.container {
+  @apply .w-full .bg-white .rounded .shadow-lg .p-8 .m-4;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
+@tailwind utilities;
 
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
+/* Here we can add our own utilities or custom CSS */

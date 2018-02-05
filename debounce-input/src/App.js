@@ -3,8 +3,8 @@ import React, { Component } from "react";
 class App extends Component {
   render() {
     return (
-      <div className="flex items-center h-screen w-full bg-teal-lighter">
-        <div className="w-full bg-white rounded shadow-lg p-8 m-4 md:max-w-sm md:mx-auto">
+      <div className="flex flex-col items-center h-screen w-full bg-teal-lighter bg-repeat">
+        <div className="container md:max-w-sm md:mx-auto">
           <h1 className="block w-full text-center text-grey-darkest mb-6">
             Debounce in React
           </h1>
@@ -16,14 +16,12 @@ class App extends Component {
               >
                 Search input:
               </label>
-              <input
-                className="border py-2 px-3 text-grey-darkest"
-                name="search"
-                type="text"
-                id="search"
-              />
+              <input className="field" name="search" type="text" id="search" />
             </div>
           </form>
+        </div>
+        <div className="container md:max-w-sm md:mx-auto">
+          <span>Your typed characters</span>
         </div>
       </div>
     );

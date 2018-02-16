@@ -1,0 +1,169 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App Component renders correctly 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <App />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <div
+          className="container md:max-w-sm md:mx-auto"
+>
+          <h1
+                    className="block w-full text-center text-grey-darkest mb-6"
+          >
+                    Debounce in React
+          </h1>
+          <SearchInput
+                    handleChange={[Function]}
+          />
+</div>,
+        Array [],
+      ],
+      "className": "flex flex-col items-center min-h-screen w-full bg-teal-lighter bg-repeat",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <h1
+              className="block w-full text-center text-grey-darkest mb-6"
+>
+              Debounce in React
+</h1>,
+            <SearchInput
+              handleChange={[Function]}
+/>,
+          ],
+          "className": "container md:max-w-sm md:mx-auto",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Debounce in React",
+              "className": "block w-full text-center text-grey-darkest mb-6",
+            },
+            "ref": null,
+            "rendered": "Debounce in React",
+            "type": "h1",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "handleChange": [Function],
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+        ],
+        "type": "div",
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <div
+            className="container md:max-w-sm md:mx-auto"
+>
+            <h1
+                        className="block w-full text-center text-grey-darkest mb-6"
+            >
+                        Debounce in React
+            </h1>
+            <SearchInput
+                        handleChange={[Function]}
+            />
+</div>,
+          Array [],
+        ],
+        "className": "flex flex-col items-center min-h-screen w-full bg-teal-lighter bg-repeat",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <h1
+                className="block w-full text-center text-grey-darkest mb-6"
+>
+                Debounce in React
+</h1>,
+              <SearchInput
+                handleChange={[Function]}
+/>,
+            ],
+            "className": "container md:max-w-sm md:mx-auto",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Debounce in React",
+                "className": "block w-full text-center text-grey-darkest mb-6",
+              },
+              "ref": null,
+              "rendered": "Debounce in React",
+              "type": "h1",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "handleChange": [Function],
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": "div",
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;

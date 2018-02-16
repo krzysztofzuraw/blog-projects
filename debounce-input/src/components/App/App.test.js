@@ -1,9 +1,24 @@
 import React from "react";
-import ReactDOM from "react-dom";
+
+import { shallow, mount } from "enzyme";
+
 import App from "./App";
 
-it("renders without crashing", () => {
-  const div = document.createElement("div");
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+describe("App Component", () => {
+  it("renders correctly", () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it("should set state when input has changed", () => {
+    const wrapper = mount(<App />);
+    const searchInputWrapper = wrapper.find("#search");
+    searchInputWrapper.simulate("change", {
+      target: { value: "Fake Name" }
+    });
+
+    setTimeout(() => {
+      expect(wrapper.state().typedWords).toEqual(["Fake Name"]);
+    }, 200);
+  });
 });

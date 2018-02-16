@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import debounce from "lodash.debounce";
 
 import SearchInput from "../SearchInput/SearchInput";
 import SearchResult from "../SearchResult/SearchResult";
@@ -7,13 +8,25 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { typedWords: [] };
+
+    this.emitChangeDebounced = debounce(this.emitChange, 250);
+  }
+
+  componentWillUnmount() {
+    this.emitChangeDebounced.cancel();
   }
 
   handleChange = event => {
-    const { value } = event.target;
-    let typedWords = [...this.state.typedWords, value];
-    this.setState({ typedWords });
+    this.emitChangeDebounced(event.target.value);
   };
+
+  emitChange = value => {
+    if (value !== "") {
+      let typedWords = [...this.state.typedWords, value];
+      this.setState({ typedWords });
+    }
+  };
+
   render() {
     return (
       <div className="flex flex-col items-center min-h-screen w-full bg-teal-lighter bg-repeat">

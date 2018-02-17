@@ -17,7 +17,7 @@ class App extends Component {
   }
 
   handleChange = event => {
-    this.emitChangeDebounced(event.target.value);
+    this.emitChangeDebounced(event);
   };
 
   emitChange = value => {

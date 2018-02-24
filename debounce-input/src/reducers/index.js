@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 
 import { ADD_WORD } from "../actions/index";
 
-const words = (state = [], action) => {
+export const words = (state = [], action) => {
   switch (action.type) {
     case ADD_WORD:
       return [action.word, ...state];

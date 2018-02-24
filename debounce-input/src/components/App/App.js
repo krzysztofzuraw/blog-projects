@@ -7,7 +7,6 @@ import SearchResult from "../SearchResult/SearchResult";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { typedWords: [] };
 
     this.emitChangeDebounced = debounce(this.emitChange, 250);
   }
@@ -17,13 +16,12 @@ class App extends Component {
   }
 
   handleChange = event => {
-    this.emitChangeDebounced(event);
+    this.emitChangeDebounced(event.target.value);
   };
 
   emitChange = value => {
     if (value !== "") {
-      let typedWords = [...this.state.typedWords, value];
-      this.setState({ typedWords });
+      this.props.addWord(value);
     }
   };
 
@@ -36,7 +34,7 @@ class App extends Component {
           </h1>
           <SearchInput handleChange={this.handleChange} />
         </div>
-        {this.state.typedWords.map((word, key) => (
+        {this.props.words.map((word, key) => (
           <SearchResult text={word} key={key} />
         ))}
       </div>

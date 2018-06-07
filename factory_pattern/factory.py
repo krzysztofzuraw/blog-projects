@@ -40,7 +40,8 @@ class ArchiveManager(object):
     ARCHIVE_ENGINES = [ZIPArchive, TARArchive]
 
     def __init__(self, location_path, files_to_pack):
-        self.location_path, self.extension = os.path.splitext(location_path)
+        self.location_path = location_path
+        _, self.extension = os.path.splitext(location_path)
         self.files_to_pack = files_to_pack
         self.archive_engine = self.choose_archive_engine()
 

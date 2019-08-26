@@ -334,7 +334,7 @@ axobject-query@^0.1.0:
   dependencies:
     ast-types-flow "0.0.7"
 
-babel-code-frame@6.22.0, babel-code-frame@^6.11.0, babel-code-frame@^6.22.0:
+babel-code-frame@6.22.0:
   version "6.22.0"
   resolved "https://registry.yarnpkg.com/babel-code-frame/-/babel-code-frame-6.22.0.tgz#027620bee567a88c32561574e7fd0801d33118e4"
   dependencies:
@@ -342,7 +342,7 @@ babel-code-frame@6.22.0, babel-code-frame@^6.11.0, babel-code-frame@^6.22.0:
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
-babel-code-frame@^6.26.0:
+babel-code-frame@^6.11.0, babel-code-frame@^6.22.0, babel-code-frame@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-code-frame/-/babel-code-frame-6.26.0.tgz#63fd43f7dc1e3bb7ce35947db8fe369a3f58c74b"
   dependencies:
@@ -5598,9 +5598,9 @@ react-bootstrap@^0.31.1:
     uncontrollable "^4.1.0"
     warning "^3.0.0"
 
-react-dev-utils@^3.1.0:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-3.1.1.tgz#09ae7209a81384248db56547e718e65bd3b20eb5"
+react-dev-utils@^3.1.0, react-dev-utils@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-3.1.2.tgz#9c8647abf83545e1dd269a218fda4f2a246c4593"
   dependencies:
     address "1.0.2"
     anser "1.4.1"

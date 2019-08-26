@@ -1,5 +1,5 @@
 decorator==4.0.4
-Django==1.9
+Django==1.11.23
 django-leaflet==0.17.1
 django-redis-cache==1.6.5
 ipdb==0.8.1

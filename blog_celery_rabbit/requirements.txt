@@ -1,7 +1,7 @@
 amqp==2.1.1
 billiard==3.5.0.2
 celery==4.0.0
-Django==1.10.4
+Django==1.11.23
 django-bootstrap3==7.1.0
 kombu==4.0.0
 pytz==2016.7

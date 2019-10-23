@@ -7,7 +7,7 @@ django-environ==0.4.0
 psycopg2==2.6.2
 
 # Images
-Pillow==6.2.0
+Pillow==6.2.1
 
 # DRFs
 djangorestframework==3.9.1
